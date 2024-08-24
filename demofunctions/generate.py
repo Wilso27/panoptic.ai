@@ -3,6 +3,7 @@ from langchain_openai import ChatOpenAI
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 import os
+import re
 
 # Get the path to the .env file and load it
 dotenv_path = os.path.join(os.path.dirname(__file__), '..', 'config', '.env')
@@ -44,5 +45,8 @@ def generate_solution(title, diagnosis, consequences, solution, vulnerability_lo
             "vulnerability_location": vulnerability_location
         }
     )
-    
-    return response.content
+    # Replace URLs with markdown links
+    response_content = response.content
+    response_content = re.sub(r'(https?://[^\s]+)', r'[see link](\1)', response_content)
+
+    return response_content

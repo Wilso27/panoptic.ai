@@ -29,8 +29,8 @@
 
         {% if generated_response %}
         <div class="response">
-            <h2>Generated Solution:</h2>
-            <p>{{ generated_response }}</p>
+            <h2>AI Solution:</h2>
+            <div class="response-content">{{ generated_response | safe }}</div>  <!-- Use the safe filter to render HTML -->
         </div>
         {% endif %}
     </div>

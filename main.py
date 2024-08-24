@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 import pandas as pd
 from demofunctions.generate import generate_solution 
+import markdown2
+import re
 
 app = Flask(__name__)
 
@@ -29,9 +31,14 @@ def generate_solution_route():
     # Pass these to the generate_solution function
     result = generate_solution(title, diagnosis, consequences, solution, vulnerability_location)
     
+    # Convert the result from Markdown to HTML
+    result_html = markdown2.markdown(result)
+    
+    # Add target="_blank" to all links and wrap them in brackets
+    result_html = re.sub(r'<a href="(https?://[^\s]+)">see link</a>', r'<a href="\1" target="_blank">[see link]</a>', result_html)
+    
     # Render the response with the selected title still in place
-    return render_template('index.html', titles=df['Title'].tolist(), generated_response=result, selected_title=selected_title)
+    return render_template('index.html', titles=df['Title'].tolist(), generated_response=result_html, selected_title=selected_title)
 
 if __name__ == '__main__':
     app.run(debug=True)
-

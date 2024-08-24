@@ -6,8 +6,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    height: 100vh;
+    min-height: 100vh;  /* Ensure the body can grow with the content */
     flex-direction: column;
+    overflow-y: auto;  /* Allow vertical scrolling if necessary */
 }
 
 .container {
@@ -15,11 +16,13 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 90%;  /* Make the container wider */
-    max-width: 1200px;  /* Keep a maximum width for larger screens */
+    width: 90%;
+    max-width: 1200px;
     margin: 40px auto;
-    text-align: center;  /* Center all content inside the container */
+    text-align: center;
+    box-sizing: border-box;  /* Ensure padding is included in width/height calculations */
 }
+
 
 .center-image {
     display: block;
@@ -88,4 +91,9 @@ button:hover {
     padding: 15px;
     background-color: #e9ecef;
     border-radius: 4px;
+    text-align: left;  /* Ensure text is left-aligned */
+}
+
+.response-content {
+    text-align: left;  /* Ensure text inside response is left-aligned */
 }
