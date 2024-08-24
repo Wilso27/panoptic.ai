@@ -7,6 +7,7 @@ body {
     justify-content: center;
     align-items: flex-start;
     height: 100vh;
+    flex-direction: column;
 }
 
 .container {
@@ -17,7 +18,17 @@ body {
     width: 90%;  /* Make the container wider */
     max-width: 1200px;  /* Keep a maximum width for larger screens */
     margin: 40px auto;
+    text-align: center;  /* Center all content inside the container */
 }
+
+.center-image {
+    display: block;
+    margin: 0 auto 20px auto;  /* Center the image and add margin below it */
+    max-width: 400px;  /* Set the maximum width */
+    height: auto;  /* Maintain the image's aspect ratio */
+    object-fit: contain;  /* Ensure the entire image is visible without being cut off */
+}
+
 
 h1 {
     font-size: 2.5em;
@@ -27,20 +38,23 @@ h1 {
     color: #333;
 }
 
+.form-row {
+    display: flex;
+    align-items: center;  /* Align dropdown and button vertically centered */
+    gap: 20px;  /* Add space between the dropdown and the button */
+}
+
 .form-group {
     margin-bottom: 15px;
+    text-align: left;
+
+    
 }
 
 label {
     font-weight: bold;
     display: block;
     margin-bottom: 10px;
-}
-
-.form-row {
-    display: flex;
-    align-items: center;  /* Align dropdown and button vertically centered */
-    gap: 20px;  /* Add space between the dropdown and the button */
 }
 
 select {
