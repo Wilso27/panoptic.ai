@@ -13,13 +13,20 @@ def load_prompt(file_path):
         return file.read()
 
 # Load the prompt from the text file
-prompt_path = os.path.join(os.path.dirname(__file__), 'prompt_template.txt')
+prompt_path = os.path.join(os.path.dirname(__file__), '..', 'demodata', 'prompt_template.txt')
 main_prompt = load_prompt(prompt_path)
 
 # Create a prompt template from the loaded prompt
 prompt = PromptTemplate.from_template(
     main_prompt
 )
+
+
+def get_vuln_info(vuln_id):
+    # read in as a csv and return the row with the vuln_id 
+    pass
+
+
 
 def generate_solution(title, diagnosis, consequences, solution, vulnerability_location):
     

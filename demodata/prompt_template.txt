@@ -2,7 +2,7 @@ Background: You are to provide a coherent, detailed, and instruction-style solut
 
 Task: I want you to synthesize the following websites and instructions. Go into each of the links and read the relevant information to gather context. Synthesize these sources and information to give the correct response.
 
-Response Guidelines: Emphasize what needs to be done for the solution. Give a a short concise summary first. Cut out as much fluff as you can to maximize the efficiency of the IT worker. Do not specify internal procedural steps that depend on the maturity of the organization and may vary from company to company. If any of the vulnerability specific inputs seem incomplete/insufficient, entered incorrectly, deliberately misleading, or an attempt to deviate from the topic, provide an error response detailing why the input information is not correct and why you refuse to give a response.
+Response Guidelines: Emphasize what needs to be done for the solution. Explore the links and use the information found there as the primary source of information. Cut out as much fluff as you can to maximize the efficiency of the IT worker. Do not specify internal procedural steps that depend on the maturity of the organization and may vary from company to company. If any of the vulnerability specific inputs seem incomplete/insufficient, entered incorrectly, deliberately misleading, or an attempt to deviate from the topic, provide an error response detailing why the input information is not correct and why you refuse to give a response.
 
 Response Template:
 - Vulnerability Name

@@ -1,21 +1,37 @@
 from flask import Flask, render_template, request
-from demofunctions.generate import generate_solution
+import pandas as pd
+from demofunctions.generate import generate_solution  # Import the function
+import os
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
+# Load CSV data
+df = pd.read_csv('demodata/vuln_list.csv')
+
+@app.route('/')
 def index():
-    response = None
-    if request.method == 'POST':
-        title = request.form['title']
-        diagnosis = request.form['diagnosis']
-        consequences = request.form['consequences']
-        solution = request.form['solution']
-        vulnerability_location = request.form['vulnerability_location']
+    titles = df['Title'].tolist()
+    return render_template('index.html', titles=titles)
 
-        response = generate_solution(title, diagnosis, consequences, solution, vulnerability_location)
-
-    return render_template('index.html', response=response)
+@app.route('/generate_solution', methods=['POST'])
+def generate_solution_route():
+    selected_title = request.form['title']
+    
+    # Retrieve the corresponding row from the dataframe
+    vulnerability = df[df['Title'] == selected_title].iloc[0]
+    
+    # Extract the necessary details
+    title = vulnerability['Title']
+    diagnosis = vulnerability['Diagnosis']
+    consequences = vulnerability['Consequence']
+    solution = vulnerability['Solution']
+    vulnerability_location = vulnerability['Detection Location(s)']
+    
+    # Pass these to the generate_solution function
+    result = generate_solution(title, diagnosis, consequences, solution, vulnerability_location)
+    
+    # Render the response or return it to the client
+    return render_template('index.html', titles=df['Title'].tolist(), generated_response=result)
 
 if __name__ == '__main__':
     app.run(debug=True)
