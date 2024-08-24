@@ -11,7 +11,7 @@
         <!-- Add the image here -->
         <img src="{{ url_for('static', filename='images/secuvantlogofun.png') }}" alt="Your Image Description" class="center-image">
         
-        <h1>AI Vulnerability Remediation Demo</h1>
+        <h1>Panoptic AI Feature Enhancement Prototype</h1>
         
         <form id="vulnerability-form" method="POST" action="/generate_solution" onsubmit="return validateForm()">
             <div class="form-group">
@@ -23,7 +23,7 @@
                         <option value="{{ title }}" {% if title == selected_title %}selected{% endif %}>{{ title }}</option>
                         {% endfor %}
                     </select>
-                    <button type="submit" class="btn btn-primary" onclick="showLoading()">Generate Solution</button>
+                    <button type="submit" class="btn btn-primary">Generate Solution</button>
                 </div>
             </div>
 
@@ -50,11 +50,14 @@
     <script>
         function validateForm() {
             var dropdown = document.getElementById('vulnerability-dropdown');
-            if (dropdown.value === "-- Select --") {
+            if (dropdown.value === "") {
+                alert('Please select a vulnerability');
                 return false;  // Prevent form submission and do not show the loading circle
             }
+            else {
             showLoading();  // Only show loading if the form is valid
             return true;  // Allow form submission
+            }
         }
     
         function showLoading() {
