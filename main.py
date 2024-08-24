@@ -41,4 +41,4 @@ def generate_solution_route():
     return render_template('index.html', titles=df['Title'].tolist(), generated_response=result_html, selected_title=selected_title)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
