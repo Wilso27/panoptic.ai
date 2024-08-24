@@ -12,6 +12,7 @@
         <img src="{{ url_for('static', filename='images/secuvantlogofun.png') }}" alt="Your Image Description" class="center-image">
         
         <h1>AI Vulnerability Remediation Demo</h1>
+        
         <form id="vulnerability-form" method="POST" action="/generate_solution" onsubmit="return validateForm()">
             <div class="form-group">
                 <label for="title">Vulnerability:</label>
@@ -22,27 +23,45 @@
                         <option value="{{ title }}" {% if title == selected_title %}selected{% endif %}>{{ title }}</option>
                         {% endfor %}
                     </select>
-                    <button type="submit" class="btn btn-primary">Generate Solution</button>
+                    <button type="submit" class="btn btn-primary" onclick="showLoading()">Generate Solution</button>
                 </div>
             </div>
+
+            <!-- Loading animation placed here, underneath the dropdown -->
+            <div id="loading" class="loading" style="display: none;">
+                <div class="loading-content">
+                    <div class="loading-spinner"></div>
+                    <p>Generating AI Solution...</p>
+                </div>
+            </div>
+            
         </form>
 
-        {% if generated_response %}
-        <div class="response">
-            <h2>AI Solution:</h2>
-            <div class="response-content">{{ generated_response | safe }}</div>  <!-- Use the safe filter to render HTML -->
+        <div id="response-section" style="{% if not generated_response %}display: none;{% endif %}">
+            {% if generated_response %}
+            <div class="response">
+                <h2>Generated Solution:</h2>
+                <div class="response-content">{{ generated_response | safe }}</div>
+            </div>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
 
     <script>
         function validateForm() {
             var dropdown = document.getElementById('vulnerability-dropdown');
-            if (dropdown.value === "") {
-                return false;  // Prevent form submission
+            if (dropdown.value === "-- Select --") {
+                return false;  // Prevent form submission and do not show the loading circle
             }
+            showLoading();  // Only show loading if the form is valid
             return true;  // Allow form submission
         }
+    
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('response-section').style.display = 'none';  // Hide the response section
+        }
     </script>
+
 </body>
 </html>

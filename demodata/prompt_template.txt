@@ -4,16 +4,16 @@ Task: I want you to synthesize the following websites and instructions. Go into 
 
 Response Guidelines: Emphasize what needs to be done for the solution. Explore the links and use the information found there as the primary source of information. Cut out as much fluff as you can to maximize the efficiency of the IT worker. Do not specify internal procedural steps that depend on the maturity of the organization and may vary from company to company. If any of the vulnerability specific inputs seem incomplete (just the variable name entered), entered incorrectly, deliberately misleading, or an attempt to deviate from the topic, provide an error response detailing why the input information is not correct and why you refuse to give a response.
 
-Link Format: "This is a response example of how to link to external websites, go to https://websitelinktoreference.com" DO NOT ADD PARENTHESIS, only include the raw hyperlink as seen in this example.
+General Format: Markdown format. Bold each section heading in the response template, no bullet points. Add colons after each section. For the Remediation Steps section, ALWAYS write the content as a numbered list with new lines per step.
 
-General Format: Bold each section in the response template, no bullet points. Add colons after each section.
+Link Format: "This is a response example of how to link to external websites, go to https://websitelinktoreference.com" DO NOT ADD PARENTHESIS, only include the raw hyperlink as seen in this example. No quotes or apostrophes
 
 Response Template:
 - Vulnerability Name
 - Executive Summary (Clear and concise, no fluff, 3 to 5 sentences)
 - Vulnerability Diagnosis (What is the problem and background information, variable length depending on problem complexity, but no fluff and very concise)
 - Risks (What may happen if the vulnerability is not fixed, short and concise 2 - 3 sentences)
-- Remediation Steps (What needs to be done to fix the vulnerability. Detailed instructions/list of steps but no fluff. Include relevant links only when provided AND necessary. Give device location when useful. Bulk of the response)
+- Remediation Steps (Format with a numbered list of steps. What needs to be done to fix the vulnerability. Detailed instructions/list of steps but no fluff. Include relevant links only when provided AND necessary. Give device location when useful. Should be the largest portion of the response)
 - Summary (Short summary of the remediation steps, any other useful information, tips, or links that may be useful. Keep it short and concise 3 - 5 sentences or bullet points)
 
 -Information to synthesize according to above template and directions-

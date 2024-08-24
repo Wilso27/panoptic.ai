@@ -23,15 +23,13 @@ body {
     box-sizing: border-box;  /* Ensure padding is included in width/height calculations */
 }
 
-
 .center-image {
     display: block;
-    margin: 0 auto 20px auto;  /* Center the image and add margin below it */
-    max-width: 400px;  /* Set the maximum width */
-    height: auto;  /* Maintain the image's aspect ratio */
-    object-fit: contain;  /* Ensure the entire image is visible without being cut off */
+    margin: 0 auto 20px auto;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
 }
-
 
 h1 {
     font-size: 2.5em;
@@ -43,15 +41,13 @@ h1 {
 
 .form-row {
     display: flex;
-    align-items: center;  /* Align dropdown and button vertically centered */
-    gap: 20px;  /* Add space between the dropdown and the button */
+    align-items: center;
+    gap: 20px;
 }
 
 .form-group {
     margin-bottom: 15px;
     text-align: left;
-
-    
 }
 
 label {
@@ -61,25 +57,25 @@ label {
 }
 
 select {
-    width: 100%;  /* Make the dropdown fill the available space */
-    padding: 12px;  /* Increase padding for better touch targets */
+    width: 100%;
+    padding: 12px;
     border: 1px solid #cccccc;
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 1em;
-    height: 48px;  /* Set a consistent height for the dropdown */
+    height: 48px;
 }
 
 button {
-    padding: 12px 20px;  /* Adjust padding for a more balanced look */
+    padding: 12px 20px;
     background-color: #007bff;
     color: #ffffff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 1em;
-    height: 48px;  /* Make button height consistent with the dropdown */
-    white-space: nowrap;  /* Ensure the button text doesn't wrap */
+    height: 48px;
+    white-space: nowrap;
 }
 
 button:hover {
@@ -91,9 +87,44 @@ button:hover {
     padding: 15px;
     background-color: #e9ecef;
     border-radius: 4px;
-    text-align: left;  /* Ensure text is left-aligned */
+    text-align: left;
 }
 
 .response-content {
     text-align: left;  /* Ensure text inside response is left-aligned */
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #007bff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;  /* Center horizontally */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading p {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #007bff;
+    text-align: center;
 }
