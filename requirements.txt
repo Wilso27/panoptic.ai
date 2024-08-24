@@ -40,6 +40,7 @@ frozenlist==1.4.1
 fsspec==2024.6.1
 gast==0.6.0
 google-pasta==0.2.0
+groq==0.9.0
 grpcio==1.65.1
 h11==0.14.0
 h5py==3.11.0
@@ -66,6 +67,7 @@ keras==3.4.1
 kiwisolver==1.4.5
 langchain==0.2.14
 langchain-core==0.2.34
+langchain-groq==0.1.9
 langchain-openai==0.1.22
 langchain-text-splitters==0.2.2
 langsmith==0.1.104
