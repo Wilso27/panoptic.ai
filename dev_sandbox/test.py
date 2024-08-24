@@ -1,5 +1,6 @@
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 import os
 
@@ -24,8 +25,8 @@ prompt = PromptTemplate.from_template(
 
 def generate_solution(title, diagnosis, consequences, solution, vulnerability_location):
     
-    model = ChatOpenAI(
-        model="gpt-4o",
+    model = ChatGroq(
+        model="llama-3.1-70b-versatile",  # gpt-4o
         temperature=0.01
     )
     
