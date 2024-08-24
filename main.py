@@ -1,11 +1,10 @@
 from flask import Flask, render_template, request
 import pandas as pd
-from demofunctions.generate import generate_solution  # Import the function
-import os
+from demofunctions.generate import generate_solution 
 
 app = Flask(__name__)
 
-# Load CSV data
+# Load the CSV data
 df = pd.read_csv('demodata/vuln_list.csv')
 
 @app.route('/')
@@ -30,8 +29,9 @@ def generate_solution_route():
     # Pass these to the generate_solution function
     result = generate_solution(title, diagnosis, consequences, solution, vulnerability_location)
     
-    # Render the response or return it to the client
-    return render_template('index.html', titles=df['Title'].tolist(), generated_response=result)
+    # Render the response with the selected title still in place
+    return render_template('index.html', titles=df['Title'].tolist(), generated_response=result, selected_title=selected_title)
 
 if __name__ == '__main__':
     app.run(debug=True)
+

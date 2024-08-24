@@ -2,10 +2,11 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
-    padding: 20px;  /* Adding padding to prevent content from touching the edges */
+    padding: 0;
     display: flex;
     justify-content: center;
-    align-items: flex-start;  /* Align items to the top instead of the center */
+    align-items: flex-start;
+    height: 100vh;
 }
 
 .container {
@@ -13,13 +14,13 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 600px;
-    margin-top: 40px;  /* Ensure there's enough space above the container */
+    width: 90%;  /* Make the container wider */
+    max-width: 1200px;  /* Keep a maximum width for larger screens */
+    margin: 40px auto;
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 2.5em;
     margin-top: 0;
     margin-bottom: 20px;
     text-align: center;
@@ -33,32 +34,35 @@ h1 {
 label {
     font-weight: bold;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
-input[type="text"],
-textarea {
-    width: 100%;
-    padding: 10px;
+.form-row {
+    display: flex;
+    align-items: center;  /* Align dropdown and button vertically centered */
+    gap: 20px;  /* Add space between the dropdown and the button */
+}
+
+select {
+    width: 100%;  /* Make the dropdown fill the available space */
+    padding: 12px;  /* Increase padding for better touch targets */
     border: 1px solid #cccccc;
     border-radius: 4px;
     box-sizing: border-box;
-}
-
-textarea {
-    resize: vertical;
-    height: 100px;
+    font-size: 1em;
+    height: 48px;  /* Set a consistent height for the dropdown */
 }
 
 button {
-    width: 100%;
-    padding: 10px;
+    padding: 12px 20px;  /* Adjust padding for a more balanced look */
     background-color: #007bff;
     color: #ffffff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1em;
+    height: 48px;  /* Make button height consistent with the dropdown */
+    white-space: nowrap;  /* Ensure the button text doesn't wrap */
 }
 
 button:hover {

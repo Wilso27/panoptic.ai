@@ -22,12 +22,6 @@ prompt = PromptTemplate.from_template(
 )
 
 
-def get_vuln_info(vuln_id):
-    # read in as a csv and return the row with the vuln_id 
-    pass
-
-
-
 def generate_solution(title, diagnosis, consequences, solution, vulnerability_location):
     
     model = ChatOpenAI(
@@ -40,15 +34,14 @@ def generate_solution(title, diagnosis, consequences, solution, vulnerability_lo
         | model
     )
     
-    # response = chain.invoke(
-    #     {
-    #         "title": title,
-    #         "diagnosis": diagnosis,
-    #         "consequences": consequences,
-    #         "solution": solution,
-    #         "vulnerability_location": vulnerability_location
-    #     }
-    # )
+    response = chain.invoke(
+        {
+            "title": title,
+            "diagnosis": diagnosis,
+            "consequences": consequences,
+            "solution": solution,
+            "vulnerability_location": vulnerability_location
+        }
+    )
     
-    # return response.content
-    return "test"
+    return response.content
