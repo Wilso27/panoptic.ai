@@ -1,0 +1,20 @@
+
+
+# Llama Models:
+llama3-8b-8192
+llama-3.1-8b-instant
+llama-3.1-70b-versatile
+llama-3.1-405b-reasoning
+
+# Tool Use:
+llama3-groq-70b-8192-tool-use-preview
+llama3-groq-8b-8192-tool-use-preview  # Supposedly only 1% worse than 70b (whatever that means)
+
+# OpenAI Models:
+gpt-4o
+gpt-4o-mini
+gpt-4-turbo
+gpt-4
+gpt-3.5-turbo
+chatgpt-4o-latest
+
