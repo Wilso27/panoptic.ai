@@ -1,15 +1,9 @@
-from langchain_core.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.messages import HumanMessage, AIMessage
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 import os
-import markdown2
 import re
-from flask import Flask, render_template, request
-import pandas as pd
-df = pd.read_csv('demodata/vuln_list.csv')
-
-
 
 # Get the path to the .env file and load it
 dotenv_path = os.path.join(os.path.dirname(__file__), '..', 'config', '.env')
@@ -25,32 +19,36 @@ prompt_path = os.path.join(os.path.dirname(__file__), '..', 'demodata', 'prompt_
 main_prompt = load_prompt(prompt_path)
 
 # Create a prompt template from the loaded prompt
-prompt = PromptTemplate.from_template(
+prompt = ChatPromptTemplate.from_template(
     main_prompt
 )
 
+# Define the model
+model = ChatGroq(model="llama-3.1-70b-versatile", temperature=0.01)
 
 def generate_solution(title, diagnosis, consequences, solution, vulnerability_location):
-    
-    model = ChatGroq(
-        model="llama-3.1-70b-versatile",  # gpt-4o
-        temperature=0.01
-    )
-    
     chain = (
         prompt
         | model
     )
-    
-    response = chain.invoke(
-        {
-            "title": title,
-            "diagnosis": diagnosis,
-            "consequences": consequences,
-            "solution": solution,
-            "vulnerability_location": vulnerability_location
-        }
-    )
+    for _ in range(5):
+        try:
+            response = chain.invoke(
+                {
+                    "title": title,
+                    "diagnosis": diagnosis,
+                    "consequences": consequences,
+                    "solution": solution,
+                    "vulnerability_location": vulnerability_location
+                }
+            )
+            break
+        
+        # If the response fails, try again
+        except:
+            continue
+        # AIMessage("I'm sorry, I couldn't generate a response. Please try again late.")
+        
     # Replace URLs with markdown links
     response_content = response.content
     response_content = re.sub(r'(https?://[^\s]+)', r'[see link](\1)', response_content)

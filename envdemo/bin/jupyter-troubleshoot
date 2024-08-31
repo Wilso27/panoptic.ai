@@ -1,4 +1,4 @@
-#!/Users/samlayton/Desktop/Work/Secuvant/panoptic.ai/envdemo/bin/python3.12
+#!/Users/samlayton/Desktop/Work/Secuvant/panoptic.ai/envdemo/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

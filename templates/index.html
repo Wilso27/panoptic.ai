@@ -37,11 +37,28 @@
             
         </form>
 
-        <div id="response-section" style="{% if not generated_response %}display: none;{% endif %}">
+        <div id="solution-section" style="{% if not generated_response %}display: none;{% endif %}">
             {% if generated_response %}
-            <div class="response">
-                <h2>Generated Solution:</h2>
-                <div class="response-content">{{ generated_response | safe }}</div>
+            <div class="AI-interact">
+
+                <div class="title-container-left">
+                    <h2>Generated Solution:</h2>
+                    <div class="solution">
+                        <div class="solution-content">{{ generated_response | safe }}</div>
+                    </div>
+                </div>
+
+                <div class="title-container-right">
+                    <h2>Cybersecurity Expert:</h2>
+                    <div class="solution">
+                        <div id="resizable-content">
+                            <!-- Your content here -->
+                            test text
+                        </div>
+                    </div>
+                </div>
+                
+
             </div>
             {% endif %}
         </div>
@@ -62,7 +79,7 @@
     
         function showLoading() {
             document.getElementById('loading').style.display = 'block';
-            document.getElementById('response-section').style.display = 'none';  // Hide the response section
+            document.getElementById('solution-section').style.display = 'none';  // Hide the response section
         }
     </script>
 

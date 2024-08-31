@@ -19,6 +19,7 @@ body {
     width: 90%;
     max-width: 1200px;
     margin: 40px auto;
+    margin-bottom: 10px;
     text-align: center;
     box-sizing: border-box;  /* Ensure padding is included in width/height calculations */
 }
@@ -37,6 +38,15 @@ h1 {
     margin-bottom: 20px;
     text-align: center;
     color: #333;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    text-align: left;
+    color: #333;
+    margin-left: 10px;
 }
 
 .form-row {
@@ -82,17 +92,78 @@ button:hover {
     background-color: #0056b3;
 }
 
-.response {
-    margin-top: 20px;
-    padding: 15px;
+.AI-interact {
+    display: flex; /* Use flexbox for horizontal layout */
+    justify-content: space-between; /* Ensure they are spaced evenly */
+    align-items: flex-start; /* Top align both sections */
+    padding: 20px;
     background-color: #e9ecef;
-    border-radius: 4px;
-    text-align: left;
+    border-radius: 6px;
+    padding-bottom: 20px;
+    height: 625px;
 }
 
-.response-content {
-    text-align: left;  /* Ensure text inside response is left-aligned */
+.title-container-left{
+    flex: 2; /* Take up 2/3 of the horizontal space */
+    margin-right: 20px; /* Add some space between the solution and the resizable container */
+    text-align: left;
+    overflow: auto;
 }
+
+.title-container-right{
+    flex: 1; /* Take up 2/3 of the horizontal space */
+    text-align: left;
+    overflow: auto;
+}
+
+.solution {
+    flex: 2; /* Take up 2/3 of the horizontal space */
+    margin-right: 0px; /* Add some space between the solution and the resizable container */
+    margin-top: 0px;
+    padding: 15px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    background-color: #ffffff;
+    border: 2px solid #eaeaea; /* Optional, if you want to keep the border */
+    border-radius: 6px;
+    text-align: left;
+    overflow: auto;
+    height: 575px;
+
+}
+
+.solution-content {
+    text-align: left;  /* Ensure text inside response is left-aligned */
+    margin-top: 0px;
+}
+
+#solution-section {
+    position: relative; /* Ensure the container is relative to the parent */
+    overflow: hidden; /* Hide any overflow if needed */
+    /*padding: 10px; /* Add some padding if necessary */
+}
+
+#resizable-container {
+    flex: 1; /* Take up 1/3 of the horizontal space */
+    height: 100%; /* Adjust to the height of the parent */
+    margin-top: 10px; /* Same margin as .solution */
+    background-color: #ffffff; /*Same background color as .solution */
+    border-radius: 6px; /* Same border radius as .solution */
+    text-align: left; /* Same text alignment as .solution */
+    border: 2px solid #eaeaea; /* Optional, if you want to keep the border */
+    overflow: auto; /* Allows content to scroll if it overflows */
+    height: 550px; /* Set a fixed height */
+    position: relative; /* Ensure it stays within its parent */
+
+}
+
+
+#resizable-content {
+    flex-grow: 1;
+    padding: 10px;
+    overflow: auto;
+}
+
 
 .loading {
     display: flex;
