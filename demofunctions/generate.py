@@ -3,6 +3,7 @@ from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 import os
 import re
+import time
 
 # Get the path to the .env file and load it
 dotenv_path = os.path.join(os.path.dirname(__file__), '..', 'config', '.env')
@@ -46,3 +47,7 @@ def generate_solution(title, diagnosis, consequences, solution, vulnerability_lo
     response_content = re.sub(r"(\*\*[^:]+:\*\*)\s*(?=\S)", r"\1\n", response_content)
     response_content = re.sub(r"(\*\*Remediation Steps:\*\*)\s*(?=\S)", r"\1\n\n", response_content)
     return response_content
+
+def give_dummy_answer(dummy_input):
+    time.sleep(2)
+    return "Placeholder."

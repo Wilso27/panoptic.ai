@@ -117,7 +117,6 @@ button:hover {
 }
 
 .solution {
-    flex: 2; /* Take up 2/3 of the horizontal space */
     margin-right: 0px; /* Add some space between the solution and the resizable container */
     margin-top: 0px;
     padding: 15px;
@@ -129,8 +128,11 @@ button:hover {
     text-align: left;
     overflow: auto;
     height: 575px;
-
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
+
 
 .solution-content {
     text-align: left;  /* Ensure text inside response is left-aligned */
@@ -140,7 +142,7 @@ button:hover {
 #solution-section {
     position: relative; /* Ensure the container is relative to the parent */
     overflow: hidden; /* Hide any overflow if needed */
-    /*padding: 10px; /* Add some padding if necessary */
+    margin-top: 20px; /* Add some margin to separate the sections */
 }
 
 #resizable-container {
@@ -157,13 +159,61 @@ button:hover {
 
 }
 
-
-#resizable-content {
-    flex-grow: 1;
-    padding: 10px;
-    overflow: auto;
+.text-input {
+    bottom: 0; /* Align it to the bottom of the solution container */
+    left: 0;
+    width: 100%; /* Make sure it fits within the container */
+    background-color: #f4f4f4; /* Background color for the input area */
+    border-top: 1px solid #ccc; /* Optional border for separation */
+    padding: 5px;
+    box-sizing: border-box;
 }
 
+.text-input textarea {
+    width: 100%; /* Full width of the parent */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    resize: none; /* Prevent resizing by the user */
+    height: calc(1.5em * 3.5); /* Set the height to show 3 lines of text */
+    line-height: 1.5em; /* Set line height for consistent spacing */
+    overflow-y: auto; /* Enable scrolling if the content exceeds 3 lines */
+    white-space: pre-wrap; /* Ensure text wraps to the next line */
+}
+
+.chat-display {
+    overflow-y: auto; /* Enable scrolling if content exceeds height */
+    padding: 5px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column; /* Stack chat messages vertically */
+    gap: 10px; /* Add space between messages */
+    font-size: 14px;
+    flex-grow: 1; /* Allow the chat display to grow */
+}
+
+.user-response {
+    align-self: flex-end; /* Align user messages to the right */
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.ai-response {
+    align-self: flex-start; /* Align AI messages to the left */
+    background-color: #e9ecef;
+    color: #333;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
 
 .loading {
     display: flex;

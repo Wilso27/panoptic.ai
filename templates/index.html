@@ -49,11 +49,14 @@
                 </div>
 
                 <div class="title-container-right">
-                    <h2>Cybersecurity Expert:</h2>
-                    <div class="solution">
-                        <div id="resizable-content">
-                            <!-- Your content here -->
-                            test text
+                    <h2>Cybersecurity AI:</h2>
+                    <div class="solution" style="padding: 0px;">
+
+                        <div class="chat-display"></div>
+
+                        <div class="text-input">
+                            <!-- Your input or content here -->
+                            <textarea placeholder="Ask AI here..."></textarea>
                         </div>
                     </div>
                 </div>
@@ -81,6 +84,62 @@
             document.getElementById('loading').style.display = 'block';
             document.getElementById('solution-section').style.display = 'none';  // Hide the response section
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const textarea = document.querySelector('.text-input textarea');
+            const submitButton = document.createElement('button');
+            let isProcessing = false;
+        
+            textarea.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter' && !event.shiftKey && !isProcessing) {
+                    event.preventDefault(); // Prevent default Enter behavior (new line)
+                    
+                    const userInput = textarea.value.trim();
+                    if (userInput) {
+                        // Step 1: Clear the text box
+                        textarea.value = '';
+                        
+                        // Step 2: Append the submitted text to the list (display on page)
+                        appendToChatList(userInput);
+        
+                        // Step 4: Disable further text submission
+                        isProcessing = true;
+        
+                        // Step 3: Call the function in generate.py
+                        fetch('/process_input', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ user_input: userInput })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Step 5: Append the returned content to the list
+                            appendToChatList(data.response);
+                        })
+                        .catch(error => console.error('Error:', error))
+                        .finally(() => {
+                            // Re-enable text submission
+                            isProcessing = false;
+                        });
+                    }
+                }
+            });
+        
+            function appendToChatList(text) {
+                const chatList = document.querySelector('.chat-display');
+                const newEntry = document.createElement('div');
+
+                // Select the correct class name
+                const className = chatList.children.length % 2 === 0 ? 'user-response' : 'ai-response';
+                newEntry.classList.add(className); // Add the appropriate class
+                newEntry.textContent = text;
+                chatList.appendChild(newEntry);
+                chatList.scrollTop = chatList.scrollHeight; // Scroll to the bottom
+            }
+        });
+        
     </script>
 
 </body>

@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import pandas as pd
-from demofunctions.generate import generate_solution 
+from demofunctions.generate import generate_solution, give_dummy_answer
 import markdown2
 import re
 
@@ -39,6 +39,18 @@ def generate_solution_route():
     
     # Render the response with the selected title still in place
     return render_template('index.html', titles=df['Title'].tolist(), generated_response=result_html, selected_title=selected_title)
+
+@app.route('/process_input', methods=['POST'])
+def process_input():
+    data = request.json
+    user_input = data.get('user_input')
+
+    # Call the dummy function and get the response
+    dummy_response = give_dummy_answer(user_input)
+
+    # Return the response as JSON
+    return jsonify(response=dummy_response)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
