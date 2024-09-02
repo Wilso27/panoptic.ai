@@ -101,11 +101,14 @@
                         
                         // Step 2: Append the submitted text to the list (display on page)
                         appendToChatList(userInput);
+
+                        // Step 3: Append the loading indicator as a temporary AI response
+                        const loadingDiv = appendLoadingIndicator();
         
                         // Step 4: Disable further text submission
                         isProcessing = true;
         
-                        // Step 3: Call the function in generate.py
+                        // Step 5: Call the function in generate.py
                         fetch('/process_input', {
                             method: 'POST',
                             headers: {
@@ -115,10 +118,14 @@
                         })
                         .then(response => response.json())
                         .then(data => {
-                            // Step 5: Append the returned content to the list
-                            appendToChatList(data.response);
+                            // Step 6: Replace loading indicator with AI response
+                            replaceLoadingWithResponse(loadingDiv, data.response);
                         })
-                        .catch(error => console.error('Error:', error))
+                        .catch(error => {
+                            console.error('Error:', error);
+                            // Optionally, handle errors by replacing loading with an error message
+                            replaceLoadingWithResponse(loadingDiv, 'Sorry, something went wrong. Please try again.');
+                        })
                         .finally(() => {
                             // Re-enable text submission
                             isProcessing = false;
@@ -134,9 +141,38 @@
                 // Select the correct class name
                 const className = chatList.children.length % 2 === 0 ? 'user-response' : 'ai-response';
                 newEntry.classList.add(className); // Add the appropriate class
-                newEntry.textContent = text;
+                newEntry.innerHTML = text.replace(/\n/g, '<br>');
                 chatList.appendChild(newEntry);
                 chatList.scrollTop = chatList.scrollHeight; // Scroll to the bottom
+            }
+
+            function appendLoadingIndicator() {
+                const chatList = document.querySelector('.chat-display');
+                const loadingEntry = document.createElement('div');
+                loadingEntry.classList.add('ai-response'); // Style as AI response
+        
+                // Create the 3-dot loading indicator
+                const loadingIndicator = document.createElement('div');
+                loadingIndicator.classList.add('dot-loading');
+                loadingIndicator.innerHTML = `
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                `;
+        
+                loadingEntry.appendChild(loadingIndicator);
+                chatList.appendChild(loadingEntry);
+                chatList.scrollTop = chatList.scrollHeight; // Scroll to the bottom
+        
+                return loadingEntry; // Return the loading div for later replacement
+            }
+
+            function replaceLoadingWithResponse(loadingDiv, response) {
+                // Clear the loading indicator
+                loadingDiv.innerHTML = '';
+        
+                // Set the AI response text
+                loadingDiv.textContent = response;
             }
         });
         
