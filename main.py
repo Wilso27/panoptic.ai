@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request, jsonify
 import pandas as pd
-from demofunctions.generate import generate_solution, give_dummy_answer
+from demofunctions.generate import generate_solution, generate_chat_response
 import markdown2
 import re
 
 app = Flask(__name__)
+
+# Initialize chat history
+chat_history = {}
 
 # Load the CSV data
 df = pd.read_csv('demodata/vuln_list.csv')
@@ -16,7 +19,10 @@ def index():
 
 @app.route('/generate_solution', methods=['POST'])
 def generate_solution_route():
+    # NOTE: Initialize new chat history every time a new solution is generated
+    
     selected_title = request.form['title']
+    chat_history['selected_title'] = selected_title
     
     # Retrieve the corresponding row from the dataframe
     vulnerability = df[df['Title'] == selected_title].iloc[0]
@@ -30,6 +36,7 @@ def generate_solution_route():
     
     # Pass these to the generate_solution function
     result = generate_solution(title, diagnosis, consequences, solution, vulnerability_location)
+    chat_history["generated_solution"] = result
     
     # Convert the result from Markdown to HTML
     result_html = markdown2.markdown(result)
@@ -42,14 +49,39 @@ def generate_solution_route():
 
 @app.route('/process_input', methods=['POST'])
 def process_input():
+    
+    selected_title = chat_history['selected_title']
+    
+    # Retrieve the corresponding row from the dataframe
+    vulnerability = df[df['Title'] == selected_title].iloc[0]
+    
+    # Extract the necessary details
+    title = vulnerability['Title']
+    diagnosis = vulnerability['Diagnosis']
+    consequences = vulnerability['Consequence']
+    solution = vulnerability['Solution']
+    vulnerability_location = vulnerability['Detection Location(s)']
+    vulnerability_info = {"title": title, "diagnosis": diagnosis, "consequences": consequences, "solution": solution, "vulnerability_location": vulnerability_location}
+    
     data = request.json
     user_input = data.get('user_input')
 
-    # Call the dummy function and get the response
-    dummy_response = give_dummy_answer(user_input)
+    if 'history' not in chat_history:
+        chat_history['history'] = {}
+    if 'generated_solution' not in chat_history:
+        chat_history['generated_solution'] = ""
+    
+    constructed_chat_history = ""
+    for interaction in chat_history['history']:
+        constructed_chat_history += "User: " + chat_history['history'][interaction]['user_input'] + "\n"
+        constructed_chat_history += "AI: " + chat_history['history'][interaction]['ai_response'] + "\n"
+    
+    ai_response = generate_chat_response(user_input, constructed_chat_history, chat_history['generated_solution'], vulnerability_info)
+    interaction_number = len(chat_history['history'])
+    chat_history['history'][f'interaction_{interaction_number}'] = {'user_input': user_input, 'ai_response': ai_response}
 
     # Return the response as JSON
-    return jsonify(response=dummy_response)
+    return jsonify(response=ai_response)
 
 
 if __name__ == '__main__':

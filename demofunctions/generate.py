@@ -1,4 +1,5 @@
-from langchain_core.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate, ChatPromptTemplate
+from langchain_core.messages import HumanMessage, AIMessage
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 import os
@@ -17,10 +18,16 @@ def load_prompt(file_path):
 # Load the prompt from the text file
 prompt_path = os.path.join(os.path.dirname(__file__), '..', 'demodata', 'prompt_template.txt')
 main_prompt = load_prompt(prompt_path)
+chat_system_prompt = load_prompt(os.path.join(os.path.dirname(__file__), '..', 'demodata', 'chatbot_prompt.txt'))
 
 # Create a prompt template from the loaded prompt
 prompt = PromptTemplate.from_template(
     main_prompt
+)
+
+chat_prompt = ChatPromptTemplate.from_template(
+    chat_system_prompt
+    
 )
 
 # Define the model
@@ -48,6 +55,24 @@ def generate_solution(title, diagnosis, consequences, solution, vulnerability_lo
     response_content = re.sub(r"(\*\*Remediation Steps:\*\*)\s*(?=\S)", r"\1\n\n", response_content)
     return response_content
 
-def give_dummy_answer(dummy_input):
-    time.sleep(2)
-    return "Placeholder."
+def generate_chat_response(user_input, chat_history, generated_solution, vulnerability_info):
+    
+    chain = (
+        chat_prompt
+        | model
+    )
+    
+    response_object = chain.invoke(
+        {
+            "user_input": user_input,
+            "chat_history": chat_history,
+            "generated_solution": generated_solution,
+            "title": vulnerability_info['title'],
+            "diagnosis": vulnerability_info['diagnosis'],
+            "consequences": vulnerability_info['consequences'],
+            "solution": vulnerability_info['solution'],
+            "vulnerability_location": vulnerability_info['vulnerability_location']
+        }
+    )
+
+    return response_object.content
