@@ -197,7 +197,7 @@ button:hover {
 
 .user-response {
     align-self: flex-end; /* Align user messages to the right */
-    background-color: #d1ead5;
+    background-color: #f9f5d1;
     color: #000000;
     padding: 10px;
     border-radius: 10px;

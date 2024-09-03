@@ -173,6 +173,8 @@
 
                 // Set the AI response text
                 loadingDiv.innerHTML = response;
+                const chatList = document.querySelector('.chat-display');
+                chatList.scrollTop = chatList.scrollHeight; // Scroll to the bottom
             }
         });
         

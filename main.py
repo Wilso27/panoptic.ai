@@ -43,8 +43,6 @@ def generate_solution_route():
             if _ == 2:
                 result = "An error occurred while generating the solution. Please try again."
             continue
-        
-    # result = generate_solution(title, diagnosis, consequences, solution, vulnerability_location)
     chat_history["generated_solution"] = result
     
     # Convert the result from Markdown to HTML
@@ -96,7 +94,6 @@ def process_input():
             continue
     
     # Convert the AI response from Markdown to HTML
-    #ai_response = generate_chat_response(user_input, constructed_chat_history, chat_history['generated_solution'], vulnerability_info)
     ai_response = markdown2.markdown(ai_response)
     ai_response = re.sub(r'<a href="(https?://[^\s]+)">see link</a>', r'<a href="\1" target="_blank">[see link]</a>', ai_response)
     ai_response = re.sub(r'<p>', r'<p class="no-margin">', ai_response)
