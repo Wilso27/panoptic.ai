@@ -215,6 +215,12 @@ button:hover {
     word-wrap: break-word;
 }
 
+.no-margin {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
 .loading {
     display: flex;
     justify-content: center;

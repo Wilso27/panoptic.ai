@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cybersecurity Solution Generator</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="/static/css/styles.css?v=1.0">
 </head>
 <body>
     <div class="container">
@@ -170,9 +170,9 @@
             function replaceLoadingWithResponse(loadingDiv, response) {
                 // Clear the loading indicator
                 loadingDiv.innerHTML = '';
-        
+
                 // Set the AI response text
-                loadingDiv.textContent = response;
+                loadingDiv.innerHTML = response;
             }
         });
         

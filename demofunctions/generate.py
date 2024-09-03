@@ -52,7 +52,7 @@ def generate_solution(title, diagnosis, consequences, solution, vulnerability_lo
     response_content = response.content
     response_content = re.sub(r'(https?://[^\s]+)', r'[see link](\1)', response_content)
     response_content = re.sub(r"(\*\*[^:]+:\*\*)\s*(?=\S)", r"\1\n", response_content)
-    response_content = re.sub(r"(\*\*Remediation Steps:\*\*)\s*(?=\S)", r"\1\n\n", response_content)
+    response_content = re.sub(r"(:\*\*)\s*(1\.)", r"\1\n\n\2", response_content)
     return response_content
 
 def generate_chat_response(user_input, chat_history, generated_solution, vulnerability_info):
@@ -74,5 +74,9 @@ def generate_chat_response(user_input, chat_history, generated_solution, vulnera
             "vulnerability_location": vulnerability_info['vulnerability_location']
         }
     )
+    response_content = response_object.content
+    response_content = re.sub(r'(https?://[^\s]+)', r'[see link](\1)', response_content)
+    response_content = re.sub(r"(\*\*[^:]+:\*\*)\s*(?=\S)", r"\1\n", response_content)
+    response_content = re.sub(r"(:\*\*)\s*(1\.)", r"\1\n\n\2", response_content)
+    return response_content
 
-    return response_object.content
