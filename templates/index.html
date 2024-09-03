@@ -11,7 +11,7 @@
         <!-- Add the image here -->
         <img src="{{ url_for('static', filename='images/secuvantlogofun.png') }}" alt="Your Image Description" class="center-image">
         
-        <h1>Panoptic AI Feature Enhancement Prototype</h1>
+        <h1>Panoptic AI - Prototype</h1>
         
         <form id="vulnerability-form" method="POST" action="/generate_solution" onsubmit="return validateForm()">
             <div class="form-group">
@@ -23,7 +23,7 @@
                         <option value="{{ title }}" {% if title == selected_title %}selected{% endif %}>{{ title }}</option>
                         {% endfor %}
                     </select>
-                    <button type="submit" class="btn btn-primary">Generate Solution</button>
+                    <button type="submit" class="btn btn-primary">Analyze</button>
                 </div>
             </div>
 
@@ -31,7 +31,7 @@
             <div id="loading" class="loading" style="display: none;">
                 <div class="loading-content">
                     <div class="loading-spinner"></div>
-                    <p>Generating AI Response...</p>
+                    <p>Generating Panoptic AI...</p>
                 </div>
             </div>
             
@@ -42,21 +42,21 @@
             <div class="AI-interact">
 
                 <div class="title-container-left">
-                    <h2>Generated Solution:</h2>
+                    <h2>Panoptic Recommendation:</h2>
                     <div class="solution">
                         <div class="solution-content">{{ generated_response | safe }}</div>
                     </div>
                 </div>
 
                 <div class="title-container-right">
-                    <h2>Cybersecurity AI:</h2>
+                    <h2>Panoptic AI:</h2>
                     <div class="solution" style="padding: 0px;">
 
                         <div class="chat-display"></div>
 
                         <div class="text-input">
                             <!-- Your input or content here -->
-                            <textarea placeholder="Ask AI here..."></textarea>
+                            <textarea placeholder="Ask Panoptic..."></textarea>
                         </div>
                     </div>
                 </div>
