@@ -220,6 +220,18 @@ button:hover {
     margin-bottom: 0;
 }
 
+.disclaimer {
+    font-size: 0.6em;
+    color: #666;
+    margin-top: 5px; /* Slight margin to separate from the chat display */
+    margin-bottom: 0px; /* Space before the input */
+    text-align: center; /* Center text */
+    padding: 5px 0; /* Padding to give some space */
+    padding-left: 5px; /* Add some padding to the left */
+    background-color: #f9f9f9; /* Optional background color */
+    border-top: 1px solid #ccc; /* Optional border for separation */
+    font-style: italic;
+}
 
 .loading {
     display: flex;
